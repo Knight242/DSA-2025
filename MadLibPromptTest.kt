@@ -5,8 +5,6 @@ class MadLibPromptTest {
 
     @Test
     fun madLibPrompt() {
-        // ⚠️ Hard to test interactively because it uses readLine().
-        // You can simulate input by redirecting System.`in`, like this:
         val input = "dog\n"
         val originalIn = System.`in`
         try {
@@ -20,7 +18,6 @@ class MadLibPromptTest {
 
     @Test
     fun enterMadLibs() {
-        // Similar to madLibPrompt, test with fake input
         val input = "42\ncats\n"
         val originalIn = System.`in`
         try {
@@ -71,20 +68,20 @@ class MadLibPromptTest {
     @Test
     fun testReverseList() {
         assertEquals(listOf(3, 2, 1), reverseList(listOf(1, 2, 3)))
-        assertEquals(emptyList<Int>(), reverseList(emptyList<Int>())) // ✅ specify <Int>
+        assertEquals(emptyList<Int>(), reverseList(emptyList<Int>())) 
     }
 
     @Test
     fun makeSalesTax() {
         val addTax = makeSalesTax(0.1)
-        assertEquals(110.0, addTax(100.0), 1e-9) // ✅ fixed
+        assertEquals(110.0, addTax(100.0), 1e-9) // 
     }
 
     @Test
     fun testCompose() {
         val f = { x: Int -> x + 1 }
         val g = { x: Int -> x * 2 }
-        val composed = compose<Int, Int, Int>(f, g) // ✅ specify type parameters
+        val composed = compose<Int, Int, Int>(f, g)  
         assertEquals(11, composed(5))
     }
 

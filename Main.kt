@@ -48,7 +48,7 @@ fun <T, R, V> compose(f: (R) -> V, g: (T) -> R): (T) -> V {
     return { x: T -> f(g(x)) }
 }
 
-// === 4. Searching Algorithms ===
+// 4. Searching Algorithms
 
 fun linearSearch(numList: List<Int>, target: Int): Int? {
     for ((index, value) in numList.withIndex()) {
