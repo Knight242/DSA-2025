@@ -1,0 +1,54 @@
+# Sorting Algorithm Benchmark
+
+## 1. Introduction
+I implemented the sorting algorithms below:
+
+- **Insertion Sort** – simple, Θ(n²)
+- **Selection Sort** – simple, Θ(n²)
+- **Merge Sort** – divide-and-conquer, Θ(n log n)
+- **Heap Sort** – in-place, Θ(n log n)
+
+---
+
+## Testing Algorithms
+- Used Kotlin’s `Random.nextInt()` to generate lists of random integers in range 0 – 100 000
+
+- I tested arrays of size **10**, **100**, **1 000**, **10 000**, and **100 000**
+
+- Used Kotlin’s `measureTime` function to record the runtime of each sort in milliseconds
+
+- Repetition: Each size was run once for this benchmark; can run multiple times to get an average
+
+---
+
+## 3. Results
+
+| List Size | Insertion Sort (ms) | Selection Sort (ms) | Merge Sort (ms) | Heap Sort (ms) |
+|-----------|--------------------:|--------------------:|----------------:|---------------:|
+| 10        | 1.40 ms             | 0.05 ms             | 0.07 ms         | 0.02 ms        |
+| 100       | 0.41 ms             | 0.49 ms             | 0.48 ms         | 0.22 ms        |
+| 1 000     | 8.34 ms             | 10.08 ms            | 2.16 ms         | 0.64 ms        |
+| 10 000    | 65.02 ms            | 68.51 ms            | 7.68 ms         | 3.98 ms        |
+| 100 000   | 2 675.12 ms         | 4 883.21 ms         | 29.26 ms        | 29.18 ms       |
+
+---
+
+## Results
+
+- For small lists (≤ 100) all algorithms run in well under a millisecond, hard to tell any difference
+- For medium sizes (1 000 – 10 000) the quadratic algorithms (insertion and selection) slow down a ton taking tens of milliseconds
+while the Θ(n log n) algorithms stays under 10 ms
+- For large size (100 000) the difference is very noticeable:
+  - Insertion Sort: 2.7 s
+  - Selection Sort: 4.9 s
+  - Merge & Heap Sort: ≈ 29 ms each (about 100 times faster)
+
+---
+
+## Conclusions
+
+- Merge Sort and Heap Sort scale better with larger size due to their Θ(n log n) complexity
+- Insertion Sort and Selection Sort can be used for very small inputs or nearly sorted data but becomes not worth it on larger datasets
+- Between the Θ(n log n) algorithms, both Merge and Heap performed similarly on these tests
+
+
