@@ -1,0 +1,22 @@
+Excersize 1:
+a. The key difference between the two pseudocode is the way they are determining the shortest
+path. In the previous class, we are finding the shortest path in terms of
+number of edges whereas now we are looking for the shortest path in terms of total
+WEIGHT edges.
+-> BFS and DPS use queue and stack respectively while Dijkstra has a PriorityQueue
+b. Once the pseudocode is finished, there should be some kind of prev_map or dict
+to be able to look at the nodes that led to the shortest path.
+Excersize 2:
+These run times are attractive because Dijkstra's algorithm repeatedly needs to find
+and remove the vertex with the smallest distance and update the neighbor vertices
+according to their prio. Using a prio queue with these run times for insert, delete and
+find-min allows the algorithm not have to look at ALL the vertices. In theory it should
+be more effective and the algo will be faster.
+Excersize 3:
+We are missing Decrease Key: Just basically updates the distance of a vertex thats already
+in priority queue that leads to the shortest path
+To implement this, we can re-insert the vertex with the smaller distance to ignore
+farther distances when remoiving them from the queue
+Excersize 4: I would assume this is because each of the algorithms all work by moving one
+element from the root-leaf path in a binary heap with the height being the same for each
+of them but I could be wrong.
