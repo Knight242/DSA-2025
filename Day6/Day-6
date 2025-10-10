@@ -1,0 +1,65 @@
+Excersize 1:
+If we were to remove toVisit, this would mean that our algorithm can potentially return to
+the same nodes an infinite number of times especially if the graph has cycles. This could
+complicate run times and could also mess up the priorityList.
+The purpose of toVisit is to have a set of visited Nodes that we know we have looked at in the
+algorithm.
+
+Excersize 2:
+Edited pseudocode:
+val toVisit = mutableSetOf<Node>()
+val priorityList = PriorityQueue<Node>()
+val cameFrom = mutableMapOf<Node, Node?>()
+
+priorityList.add(root)
+toVisit.add(root)
+cameFrom[root] = null
+
+while (priorityList.isNotEmpty()) {
+    val n = priorityList.poll()
+
+    if (n == target) {
+        // reconstruct path
+        val path = mutableListOf<Node>()
+        var current: Node? = n
+        while (current != null) {
+            path.add(0, current) // prepend
+            current = cameFrom[current]
+        }
+        return path
+    }
+
+    for (m in nodesConnectedTo(n)) {
+        if (m !in toVisit) {
+            priorityList.add(m)
+            toVisit.add(m)
+            cameFrom[m] = n
+        }
+    }
+}
+return null
+
+Reasoning: Using the MutableMap was a helpful hint because it allows me to add entries
+every time a new node is discovered/searched
+
+Excersize 4:
+Pseudocode -> Opposite of BFS
+function dfs(start, target):
+    toVisit ← empty set
+    stack ← empty stack
+
+    stack.push(start)
+    toVisit.add(start)
+
+    while stack is not empty:
+        n ← stack.pop()
+
+        if n == target:
+            return true
+
+        for each neighbor in nodesConnectedTo(n):
+            if neighbor not in toVisit:
+                stack.push(neighbor)
+                toVisit.add(neighbor)
+
+    return false
