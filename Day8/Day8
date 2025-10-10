@@ -1,0 +1,24 @@
+Excersize 1:
+Dijkstra's time complexity: Θ((n+m)logn)
+Explanation:
+- Each of the three operations (min, insert, delete) is logn
+- Each vertex insterted and deleted once -> nlogn
+- Decrease key -> mlogn
+Excersize 2:
+The time complexity for selection sort would be Θ(n^2)
+- Performs the same number of operations no matter what (the comparisons)
+Excersize 3:
+The time complexity for heap sort is Θ(nlogn)
+Excersize 4:
+Θ(nlogn)
+Tree:
+Lvl 1- n
+Lvl 2- n/2
+Lvl 3- n/4
+Lvl i- n/2^i
+- All of them end up costing Θ(n) because n dominates
+- There are Θ(logn) levels
+Excersize 5:
+Following Master's Theorom, merge sort would fall under Case 2 meaning it would fit
+this time complexity: T(n) = Θ(n^(log b^A) logn) -> hard to express on keyboard
+But basically it will just end up being n since it will equal 1.
