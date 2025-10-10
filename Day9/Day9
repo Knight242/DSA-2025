@@ -1,0 +1,6 @@
+Excersize 1: For binary search, following the master theorom:
+(log vb ^a) would just end up being 1 which would follow Case 2
+being very similar to merge sort but instead the time complexity
+would be 0(logn)
+Excersize 2:
+Did them for HW
