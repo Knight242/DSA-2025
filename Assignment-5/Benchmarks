@@ -1,0 +1,7 @@
+# Benchmarks
+Benchmarked original matrix multiplication and Strassen’s algorithm for square matrices of sizes 32, 64, 128, and 256.
+For each size, Strassen was looked at with several cutoff thresholds determining when to switch to standard multiplication.
+My results showed that Strassen’s algorithm begins to outperform the conventional method for sizes above 64,
+especially when the cutoff is around 64 to 128.
+For smaller matrices, recursive overhead dominates, causing Strassen to underperform.
+A hybrid implementation that uses the original multiplication below n ≈ 64 achieves the best overall efficiency.
