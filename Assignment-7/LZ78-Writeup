@@ -1,0 +1,23 @@
+Write-Up
+I tested the LZ78 encoder using my custom HashAssociativeArray that I implemented using several
+different input strings to see how well the algorithm compresses different patterns of data.
+The encoder outputs a list of tokens (index,nextChar) where index represents a previously seen
+substring in the dictionary and nextChar is the character that extends it. Essentially, the fewer tokens
+relative to the input length indicates better compression.
+LZ78 Results
+1. String used: "AAAAAA" - Compresses really well because the dictionary quickly learned
+that A, AA, and AAA covered the whole string
+2. String used: "ABABABA" - Compressed okay, even though the pattern repeats, each alternate string
+produces a slightly new substring so reuse of the dictionary is limited here
+3. String used: "the quick brown fox jumps over the lazy dog the quick brown fox" - produced 41 tokens for
+63 characters; phrases like "the" and "fox" helped but most of the words are unique so there was limited reuse
+of the dictionary
+4. String used: "XYZ123!@#" - 9 tokens for 9 characters; no recurring patterns. Each character was unique
+so dictionary never reused entries.
+Conclusion
+The LZ78 algorithm compresses data effectively when it contains repeating sequences or patterns.
+The associative array ensured that dictionary insertions and lookups were fast and efficient
+allowing the encoder to maintain near O(n) runtime performance across all tests.
+Repetition led to higher compression values while random or a high variation of characters/text
+is very difficult to compress. This makes sense as the algorithm depends on some kind of
+redundancy in the input to achieve better results.
