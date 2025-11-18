@@ -1,0 +1,97 @@
+# KD-Tree vs Brute Force Nearest-Neighbor — Experimental Analysis
+
+## Setup
+
+I created and used the `runExperiment(k, numPoints)` function.
+For each experiment, the system:
+1. Generated N training points (for each k-dimensional).
+2. Generated 1000 random test query points
+3. Measured:
+   - KD-tree build time,
+   - KD-tree nearest-neighbor time for 1000 queries,
+   - Brute-force nearest-neighbor time for the same 1000 queries
+
+Results were printed out in milliseconds
+
+## Results
+
+### Table — KD-Tree vs Brute Force
+
+| k  | N      | Build Time (ms) | KD-Query (ms) | Brute (ms) |
+|----|--------|------------------|----------------|-------------|
+| 2  | 10     | 4                | 2              | 1           |
+| 2  | 100    | 1                | 0              | 1           |
+| 2  | 1000   | 5                | 0              | 4           |
+| 2  | 10000  | 19               | 0              | 27          |
+| 5  | 10     | 0                | 0              | 0           |
+| 5  | 100    | 0                | 0              | 0           |
+| 5  | 1000   | 1                | 1              | 4           |
+| 5  | 10000  | 17               | 2              | 35          |
+| 10 | 10     | 0                | 0              | 0           |
+| 10 | 100    | 0                | 1              | 0           |
+| 10 | 1000   | 0                | 11             | 5           |
+| 10 | 10000  | 12               | 46             | 49          |
+
+## Analysis
+
+### Performance at low dimensionality (k = 2, 5)
+
+For k = 2, KD-tree query times are a lot faster than brute force at large N:
+
+| N      | KD (ms) | Brute (ms) | Speedup |
+|--------|----------|------------|---------|
+| 1000   | 0        | 4          | ~4×     |
+| 10000  | 0        | 27         | ~27×    |
+
+For k = 5, the trend is similar:
+
+| N      | KD (ms) | Brute (ms) | Speedup |
+|--------|----------|------------|---------|
+| 10000  | 2        | 35         | ~17×    |
+
+KD-trees scale extremely well in low dimensions and quickly outperform brute force as N grows.
+
+At k = 10, the KD-tree's performance begins to slow down:
+
+| N      | KD (ms) | Brute (ms) | Faster |
+|--------|----------|------------|---------|
+| 1000   | 11       | 5          | Brute  |
+| 10000  | 46       | 49         | ~Tie   |
+
+- As dimensionality increases, KD-tree splitting becomes less effective
+- The space becomes too “wide” for pruning to work
+- Distance metrics become less meaningful
+- KD-tree search approaches linear time
+
+At higher dimensions (k ≥ 10), KD-trees lose their efficiency advantage and may even become slower than brute force.
+
+## Build time observations
+
+KD-tree build time grows with N, but is small:
+
+| N      | Build Time (ms) |
+|--------|------------------|
+| 1000   | 0–5              |
+| 10000  | 12–19            |
+
+## Conclusions
+
+### KD-trees are best when:
+- The dimensionality is low or moderate (k ≤ 5)
+- The dataset is large (N ≥ 1000)
+- You need to perform many nearest-neighbor queries
+
+In these settings, KD-trees in this experiment achieved **10×–27× speedups** over brute force
+
+### Brute force is competitive or better when:
+- The dimensionality is high (k ≥ 10)
+- The dataset is small
+- You only need to answer a few queries
+- KD-tree pruning becomes ineffective
+
+The KD-tree query times begin to approach or exceed the linear-time brute-force method.
+
+## Final Summary
+
+KD-trees significantly accelerate nearest-neighbor search in low-dimensional spaces, especially with large datasets and many queries.
+As dimensionality increases, their performance advantage begins to diminish, and brute force becomes equally efficient or superior.
